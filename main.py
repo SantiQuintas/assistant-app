@@ -16,7 +16,8 @@ def main():
             frame = mi_camara.leer_frame()
             if frame is None:
                 break
-            frame, lista_puntos = mi_detector.encontrar_manos(frame)
+            frame_espejo = cv.flip(frame, 1)
+            frame, lista_puntos = mi_detector.encontrar_manos(frame_espejo)
             if len(lista_puntos) != 0:
                 # El índice (dedo índice) es el punto número 8. 
                 # lista_puntos[8] te debería devolver: [8, coord_X, coord_Y]

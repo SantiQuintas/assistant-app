@@ -24,7 +24,7 @@ class DetectorManos:
                 for id, landmark in enumerate(mano.landmark):
                     posicion = []
                     posicion.append(id)
-                    posicion.append(int((-1)*landmark.x * ancho))
+                    posicion.append(int(landmark.x * ancho))
                     posicion.append(int(landmark.y * alto))
                     posiciones.append(posicion)
 
