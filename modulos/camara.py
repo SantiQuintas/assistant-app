@@ -5,7 +5,7 @@ import sys
 class Camara:
     camara = None
     def __init__(self):
-        self.camara = cv.VideoCapture(0,cv.CAP_DSHOW)
+        self.camara = cv.VideoCapture(0, cv.CAP_DSHOW)
         if not self.camara.isOpened():
             print("No se puede abrir la camara")
             self.camara = cv.VideoCapture(1, cv.CAP_DSHOW)
