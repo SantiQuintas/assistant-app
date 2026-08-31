@@ -1,4 +1,3 @@
-import mediapipe as mp
 import cv2 as cv
 from mediapipe.python.solutions import hands
 from mediapipe.python.solutions import drawing_utils
@@ -11,7 +10,7 @@ class DetectorManos:
     def __init__(self):
         self.mp_manos = hands
         self.mp_dibujo = drawing_utils
-        self.manos = self.mp_manos.Hands(static_image_mode = False, max_num_hands = 2, min_detection_confidence=0.7, min_tracking_confidence=0.7) 
+        self.manos = self.mp_manos.Hands(static_image_mode = False, max_num_hands = 2, min_detection_confidence=0.8, min_tracking_confidence=0.8) 
         
     def encontrar_manos(self, frame):
         frame_rgb = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
@@ -26,7 +25,7 @@ class DetectorManos:
                     posicion.append(id)
                     posicion.append(int(landmark.x * ancho))
                     posicion.append(int(landmark.y * alto))
+                    posicion.append(landmark.z)
                     posiciones.append(posicion)
 
         return frame,posiciones
-    

@@ -1,9 +1,9 @@
-import numpy as np
 import cv2 as cv
 import sys
 
 class Camara:
     camara = None
+    
     def __init__(self):
         self.camara = cv.VideoCapture(0, cv.CAP_DSHOW)
         if not self.camara.isOpened():

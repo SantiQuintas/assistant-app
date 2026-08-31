@@ -1,8 +1,8 @@
 import tkinter as tk
 
-class CursorVisual:
+class Overlay:
     
-    def __init__(self):
+    def  __init__(self):
         self.root =tk.Tk()
         self.root.overrideredirect(True)
         self.root.attributes("-topmost", True)
@@ -14,9 +14,8 @@ class CursorVisual:
                                 bg=self.color_transparente, highlightthickness=0)
         self.canvas.pack()
         
-        # Dibujamos el círculo inicial (Verde, indicando movimiento)
         self.circulo = self.canvas.create_oval(2, 2, self.radio*2-2, self.radio*2-2, 
-                                               outline="white", width=3)
+                                               outline="white", width=0)
         
     def actualizar(self, x_pantalla, y_pantalla, click):
        
@@ -24,8 +23,10 @@ class CursorVisual:
         pos_y = int(y_pantalla - self.radio)
         self.root.geometry(f"+{pos_x}+{pos_y}")
         
-        if click:
+        if click == "left":
             self.canvas.itemconfig(self.circulo, outline="red", width=5)
+        elif click == "right":
+            self.canvas.itemconfig(self.circulo, outline="blue", width=5)
         else:
             self.canvas.itemconfig(self.circulo, outline="white", width=3)
             
