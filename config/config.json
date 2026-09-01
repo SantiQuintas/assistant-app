@@ -1,0 +1,16 @@
+{
+    "camera" :
+    {
+        "width" : 1280,
+        "height" : 720,
+        "fps" : 30
+    },
+    "interaction":
+    {
+        "wall_hover": 50,
+        "wall_touch" : 95,
+        "air_tap_threshold": 0.1478,
+        "scroll_threshold": 5
+    }
+
+}

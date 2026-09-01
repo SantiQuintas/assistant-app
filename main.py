@@ -7,6 +7,7 @@ from modulos.gestos import Gestos
 from modulos.sistema import ControladorMouse
 from modulos.overlay import Overlay
 
+
 def menu():
     print("¿Que modo desea usar?")
     print("Para finalizar el programa presione Q")
@@ -101,7 +102,4 @@ def main():
         print("Opcion No Valida")
         sys.exit(1)
         
-        
-if __name__ == "__main__":
-    main()
 

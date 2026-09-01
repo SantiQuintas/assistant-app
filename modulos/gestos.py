@@ -1,7 +1,9 @@
 import math
+from config.loader import config_app
 
 class Gestos:
-    umbral_click = None
+    umbrales = config_app.obtener_interaccion()
+
     def __init__(self, umbral):
         self.umbral_click = umbral
     
@@ -42,8 +44,9 @@ class Gestos:
             return "NADA"
         
         z_imaginario = self.estimar_profundidad(lista_puntos)
-        pared_2 = 50
-        pared_1 = 95
+        pared_1 = self.umbrales.get("wall_touch")
+        pared_2 = self.umbrales.get("wall_hover")
+        umbral_air_tap = self.umbrales.get("air_tap_threshold")
         z_indice = abs(lista_puntos[8][3])
         
         if z_imaginario < pared_2:
