@@ -26,18 +26,21 @@ class ControladorMouse:
             pyautogui.mouseUp(button = "right")
             self.clickd_mantenido=False
         
-            
+     
     
     def mover_mouse(self, x_cam, y_cam, ancho_cam, alto_cam, margen):
         x_pantalla = np.interp(x_cam, (margen, ancho_cam-margen), (0, self.ancho_pantalla))
-        y_pantalla = np.interp(y_cam, (margen, alto_cam-(margen+250)), (0, self.alto_pantalla))
-        
         x_final = self.x_prev + (x_pantalla - self.x_prev)/self.suavizado
+        y_pantalla = np.interp(y_cam, (margen, alto_cam-(margen+200)), (0, self.alto_pantalla))
         y_final = self.y_prev + (y_pantalla - self.y_prev)/self.suavizado
+        
+
         pyautogui.moveTo(x_final, y_final)
+   
         self.x_prev, self.y_prev = x_final, y_final
+        
         return self.x_prev, self.y_prev
-    
+
     def ejecutar_scroll(self, direccion):
         pyautogui.scroll(direccion*3)
 

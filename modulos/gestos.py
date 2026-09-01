@@ -15,7 +15,7 @@ class Gestos:
         dx = lista_puntos[8][1] - lista_puntos[4][1]
         dy = lista_puntos[8][2] - lista_puntos[4][2]
         dx2 = lista_puntos[8][1] - lista_puntos[20][1]
-        dy2 = lista_puntos[20][2] - lista_puntos[20][2]
+        dy2 = lista_puntos[8][2] - lista_puntos[20][2]
         distancia = math.hypot(dx,dy)
         distancia2 = math.hypot(dx2,dy2)
         
