@@ -7,6 +7,16 @@ class Gestos:
     def __init__(self, umbral):
         self.umbral_click = umbral
     
+    
+    def distancia_click(self, lista_puntos):
+        dx = lista_puntos[8][1] - lista_puntos[4][1]
+        dy = lista_puntos[8][2] - lista_puntos[4][2]
+        dx2 = lista_puntos[8][1] - lista_puntos[20][1]
+        dy2 = lista_puntos[8][2] - lista_puntos[20][2]
+        distancia = math.hypot(dx,dy)
+        distancia2 = math.hypot(dx2,dy2)
+        return distancia
+    
     def detectar_gestos(self, lista_puntos):
         if not lista_puntos:
             return "NADA"
