@@ -68,7 +68,7 @@ El programa cuenta con un menú de inicio por consola y dos modos de uso princip
 ### Clásico (2D):
 
 * Movés el cursor del mouse apuntando con tu dedo índice.
-* Si juntás el índice y el pulgar, apretás el clic izquierdo (hasta que no separes tus dedos, el clic seguirá apretado, lo que permite arrastrar ventanas y archivos).
+* Si juntás el dedo del medio y el pulgar, apretás el clic izquierdo (hasta que no separes tus dedos, el clic seguirá apretado, lo que permite arrastrar ventanas y archivos).
 * Si juntás el meñique con el pulgar, apretás el clic derecho; funciona igual al clic izquierdo.
 * Al erguir el índice y el dedo del medio al mismo tiempo (formando un dos o el símbolo de la paz) entrarás en modo scroll. Tu índice deja de mover el cursor, y el programa decidirá si scrollear para abajo o para arriba dependiendo de si movés tu mano en esa dirección (dependiendo de qué tanto muevas la mano, aumentará o disminuirá la velocidad del scroll).
 
