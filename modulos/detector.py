@@ -10,7 +10,7 @@ class DetectorManos:
     def __init__(self):
         self.mp_manos = hands
         self.mp_dibujo = drawing_utils
-        self.manos = self.mp_manos.Hands(static_image_mode = False, max_num_hands = 2, min_detection_confidence=0.8, min_tracking_confidence=0.8) 
+        self.manos = self.mp_manos.Hands(static_image_mode = False, max_num_hands = 1, min_detection_confidence=0.8, min_tracking_confidence=0.8) 
         
     def encontrar_manos(self, frame):
         frame_rgb = cv.cvtColor(frame, cv.COLOR_BGR2RGB)

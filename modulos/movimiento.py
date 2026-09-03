@@ -15,7 +15,9 @@ class MovementAnalyzer():
             leng = 5
             
         if len(self.historial) < leng:
-            return None
+            return {"direccion": None,
+                    "confianza" : None, 
+                    "desplazamiento" : None}
         else:
             direccion = "ESTATICO"
             confianza = None
@@ -32,20 +34,21 @@ class MovementAnalyzer():
             desplazamiento = self.historial[-1] - self.historial[0]
             abs_conf = abs(nivel_confianza)
             if abs_conf >= 2:
-                if desplazamiento < 0:
+                if desplazamiento < -2:
                     direccion = "-"
-                elif desplazamiento > 0:
+                elif desplazamiento > 2:
                     direccion = "+"
-            if absoluto < 10 and desplazamiento < 5 and desplazamiento > -5:
+                    
+            if absoluto < 12 and direccion == "ESTATICO":
                 return {"direccion": direccion,
                         "confianza" : "MUY ALTA", 
                         "desplazamiento" : desplazamiento}
-            if absoluto < 12 and desplazamiento < 8 and desplazamiento > -8:
+            if absoluto < 16 and direccion == "ESTATICO":
                 return {"direccion": direccion,
                                     "confianza" : "ALTA", 
                                     "desplazamiento" : desplazamiento}
                 
-            if absoluto < 15 and desplazamiento < 10 and desplazamiento > -10:
+            if absoluto < 20 and direccion == "ESTATICO":
                  return {"direccion": direccion,
                                         "confianza" : "MEDIA", 
                                         "desplazamiento" : desplazamiento}
@@ -71,7 +74,9 @@ class MovementAnalyzer():
                 leng = 10
                     
                 if len(self.historial2) < leng:
-                    return None
+                    return {"direccion": None,
+                                "confianza" : None, 
+                                "desplazamiento" : None}
                 else:
                     direccion = "ESTATICO"
                     confianza = None
@@ -88,20 +93,20 @@ class MovementAnalyzer():
                     desplazamiento = self.historial2[-1] - self.historial2[0]
                     abs_conf = abs(nivel_confianza)
                     if abs_conf >= 2:
-                        if desplazamiento < 0:
+                        if desplazamiento < -2:
                             direccion = "-"
-                        elif desplazamiento > 0:
+                        elif desplazamiento > 2:
                             direccion = "+"
-                    if absoluto < 10 and desplazamiento < 5 and desplazamiento > -5:
+                    if absoluto < 3:
                         return {"direccion": direccion,
                                 "confianza" : "MUY ALTA", 
                                 "desplazamiento" : desplazamiento}
-                    if absoluto < 12 and desplazamiento < 8 and desplazamiento > -8:
+                    if absoluto < 5:
                         return {"direccion": direccion,
                                             "confianza" : "ALTA", 
                                             "desplazamiento" : desplazamiento}
                         
-                    if absoluto < 15 and desplazamiento < 10 and desplazamiento > -10:
+                    if absoluto < 6:
                          return {"direccion": direccion,
                                                 "confianza" : "MEDIA", 
                                                 "desplazamiento" : desplazamiento}
@@ -123,42 +128,3 @@ class MovementAnalyzer():
                     return {"direccion": direccion,
                             "confianza" : confianza,
                             "desplazamiento" : desplazamiento}
-    def analizarclick(self):
-                    leng = 5
-                        
-                    if len(self.historial) < leng:
-                        return None
-                    else:
-                        direccion = "ESTATICO"
-                        confianza = None
-                        nivel_confianza = 0
-                        click = 0
-                        desplazamiento = 0
-                        for i in range(leng-1):
-                            if self.historial[i] < self.historial[i+1]:
-                                nivel_confianza+=1
-                            elif self.historial[i] > self.historial[i+1]:
-                                nivel_confianza-=1
-                            if self.historial[i] <= 25:
-                                click += 1
-                                
-                        desplazamiento = self.historial[-1] - self.historial[0]
-                        abs_conf = abs(nivel_confianza)
-                        if abs_conf >= 2:
-                            if desplazamiento < 0:
-                                direccion = "-"
-                            elif desplazamiento > 0:
-                                direccion = "+"
-                        
-                        if desplazamiento == "+" or click < 1:
-                            return {"direccion": direccion,
-                                    "confianza" : "BAJA",
-                                    "desplazamiento" : desplazamiento}
-                        elif confianza in ["ALTA", "MUY ALTA", "MEDIA"] and desplazamiento == "-" and click >= 1: 
-                                     return {"direccion": direccion,
-                                    "confianza" : "MUY ALTA",
-                                    "desplazamiento" : desplazamiento}
-                        else:
-                             return {"direccion": direccion,
-                                                                "confianza" : "INCIERTA",
-                                                                "desplazamiento" : desplazamiento}

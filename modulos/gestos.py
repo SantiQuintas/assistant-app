@@ -8,13 +8,11 @@ class Gestos:
         self.umbral_click = umbral
     
     
-    def distancia_click(self, lista_puntos):
-        dx = lista_puntos[8][1] - lista_puntos[4][1]
-        dy = lista_puntos[8][2] - lista_puntos[4][2]
-        dx2 = lista_puntos[8][1] - lista_puntos[20][1]
-        dy2 = lista_puntos[8][2] - lista_puntos[20][2]
+    def distancia_click(self, dedo1, dedo2):
+        dx = dedo1[1] - dedo2[1]
+        dy = dedo1[2] - dedo2[2]
         distancia = math.hypot(dx,dy)
-        distancia2 = math.hypot(dx2,dy2)
+
         return distancia
     
     def detectar_gestos(self, lista_puntos):
@@ -22,12 +20,8 @@ class Gestos:
             return "NADA"
         
         
-        dx = lista_puntos[8][1] - lista_puntos[4][1]
-        dy = lista_puntos[8][2] - lista_puntos[4][2]
-        dx2 = lista_puntos[8][1] - lista_puntos[20][1]
-        dy2 = lista_puntos[8][2] - lista_puntos[20][2]
-        distancia = math.hypot(dx,dy)
-        distancia2 = math.hypot(dx2,dy2)
+        distancia = self.distancia_click(lista_puntos[12], lista_puntos[4])
+        distancia2 = self.distancia_click(lista_puntos[20], lista_puntos[4])
         
         if distancia < self.umbral_click:
             return "left"
