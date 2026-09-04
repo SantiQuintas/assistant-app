@@ -98,21 +98,26 @@ def main():
                             print(f"Velocidad x : {cx['velocidad']}")
                             if cx['confianza'] in ["MUY ALTA", "ALTA", "MEDIA"] and cy['confianza'] in ["MUY ALTA", "ALTA", "MEDIA"]:
                                 if cx['direccion'] != "ESTATICO":
-                                    x= mi_mouse.mover_mousex(lista_puntos[8][1], ancho, margen, cx['velocidad'])
-                                    
-                                    
-                                if cy['direccion'] != "ESTATICO":
+                                    if cy['direccion'] != "ESTATICO":
+                                        x, y= mi_mouse.mover_mouse(lista_puntos[8][1], lista_puntos[8][2], ancho, alto, margen, cx['velocidad'], cy['velocidad'])
+                                    else:
+                                        x= mi_mouse.mover_mousex(lista_puntos[8][1], ancho, margen, cx['velocidad'])
+                                elif cy['direccion'] != "ESTATICO":
                                     y= mi_mouse.mover_mousey(lista_puntos[8][2], alto, margen, cy['velocidad'])
+                                              
                                     
                             elif cx['confianza'] in ["BAJA", "INCIERTA"] and cy['confianza'] not in ["MUY BAJA", "INCIERTA"]:
                                 cx = analyzer_indicex.analizar2()
                                 cy = analyzer_indicey.analizar2()
                                 if cx['confianza'] in ["MUY ALTA", "ALTA", "MEDIA"] and cy['confianza'] in ["MUY ALTA", "ALTA", "MEDIA"]:
                                     if cx['direccion'] != "ESTATICO":
-                                        x= mi_mouse.mover_mousex(lista_puntos[8][1], ancho, margen, cx['velocidad'])
-                                        
-                                    if cy['direccion'] != "ESTATICO":
-                                        y= mi_mouse.mover_mousey(lista_puntos[8][2], alto, margen, cy['velocidad'])    
+                                        if cy['direccion'] != "ESTATICO":
+                                            x, y= mi_mouse.mover_mouse(lista_puntos[8][1], lista_puntos[8][2], ancho, alto, margen, cx['velocidad'], cy['velocidad'])
+                                        else:
+                                            x= mi_mouse.mover_mousex(lista_puntos[8][1], ancho, margen, cx['velocidad'])
+                                    elif cy['direccion'] != "ESTATICO":
+                                        y= mi_mouse.mover_mousey(lista_puntos[8][2], alto, margen, cy['velocidad'])
+                                           
                                 
                     elif id == "SCROLL":  
                         if y_prev_scroll == 0:

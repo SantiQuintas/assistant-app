@@ -37,7 +37,7 @@ class MovementAnalyzer():
             tiempo_total = self.historial[-1][1] - self.historial[0][1]
             desplazamiento = self.historial[-1][0] - self.historial[0][0]
             
-            velocidad = desplazamiento / tiempo_total if tiempo_total > 0 else 0
+            velocidad = abs(desplazamiento / tiempo_total if tiempo_total > 0 else 0)
             
             abs_conf = abs(nivel_confianza)
             if abs_conf >= 2:
@@ -106,7 +106,7 @@ class MovementAnalyzer():
                     
                     tiempo_total = self.historial2[-1][1] - self.historial2[0][1]
                     desplazamiento = self.historial2[-1][0] - self.historial2[0][0]
-                    velocidad = desplazamiento / tiempo_total if tiempo_total > 0 else 0
+                    velocidad = abs(desplazamiento / tiempo_total if tiempo_total > 0 else 0)
                     abs_conf = abs(nivel_confianza)
                     if abs_conf >= 2:
                         if desplazamiento < -2:

@@ -8,10 +8,13 @@ class Camara:
         self.camara = cv.VideoCapture(0, cv.CAP_DSHOW)
         if not self.camara.isOpened():
             print("No se puede abrir la camara")
-            self.camara = cv.VideoCapture(1, cv.CAP_DSHOW)
+            self.camara = cv.VideoCapture('http://192.168.1.34:4747/mjpegfeed')
             if not self.camara.isOpened():
-                print("Error crítico: No se encuentra ninguna cámara.")
-                sys.exit(1)   
+                print("No se puede abrir la camara")
+                self.camara = cv.VideoCapture(1, cv.CAP_DSHOW)
+                if not self.camara.isOpened():
+                    print("Error crítico: No se encuentra ninguna cámara.")
+                    sys.exit(1)   
                  
     def leer_frame(self):
         ret, frame= self.camara.read()
