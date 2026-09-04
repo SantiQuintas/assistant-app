@@ -6,74 +6,39 @@ class Gestos:
 
     def __init__(self, umbral):
         self.umbral_click = umbral
-    
+        self.click_izq_apretado = False
+        self.click_der_apretado = False
+        self.margen_soltar = 15 
     
     def distancia_click(self, dedo1, dedo2):
         dx = dedo1[1] - dedo2[1]
         dy = dedo1[2] - dedo2[2]
-        distancia = math.hypot(dx,dy)
-
-        return distancia
+        return math.hypot(dx, dy)
     
+    def detectar_click(self, distancia, tipo="left"):
+        """Evalúa la distancia y devuelve True si el click debe estar apretado, False si no."""
+        if tipo == "left":
+            if not self.click_izq_apretado and distancia < self.umbral_click:
+                self.click_izq_apretado = True
+            elif self.click_izq_apretado and distancia > (self.umbral_click + self.margen_soltar):
+                self.click_izq_apretado = False
+            return self.click_izq_apretado
+            
+        elif tipo == "right":
+            if not self.click_der_apretado and distancia < self.umbral_click:
+                self.click_der_apretado = True
+            elif self.click_der_apretado and distancia > (self.umbral_click + self.margen_soltar):
+                self.click_der_apretado = False
+            return self.click_der_apretado
+            
+        return False
+        
     def detectar_gestos(self, lista_puntos):
         if not lista_puntos:
             return "NADA"
-        
-        
-        distancia = self.distancia_click(lista_puntos[12], lista_puntos[4])
-        distancia2 = self.distancia_click(lista_puntos[20], lista_puntos[4])
-        
-        if distancia < self.umbral_click:
-            return "left"
-        
-        if distancia2 < self.umbral_click:
-            return "right"
         
         y_indice = lista_puntos[8][2] < lista_puntos[6][2]
         y_medio = lista_puntos[12][2] < lista_puntos[10][2]
         if y_medio and y_indice:
             return "SCROLL"
         return "MOVER"
-    
-    def estimar_profundidad(self, lista_puntos):
-        dx = lista_puntos[9][1] - lista_puntos[0][1]
-        dy = lista_puntos[9][2] - lista_puntos[0][2]
-        distancia_mano = math.hypot(dx,dy)
-
-        return distancia_mano
-    
-    
-    def detectar_gestos_int(self, lista_puntos):
-        if not lista_puntos:
-            return "NADA"
-        
-        z_imaginario = self.estimar_profundidad(lista_puntos)
-        pared_1 = self.umbrales.get("wall_touch")
-        pared_2 = self.umbrales.get("wall_hover")
-        umbral_air_tap = self.umbrales.get("air_tap_threshold")
-        z_indice = abs(lista_puntos[8][3])
-        
-        if z_imaginario < pared_2:
-            return "NADA"
-        elif z_imaginario >= pared_2 and z_imaginario < pared_1:
-            y_indice = lista_puntos[8][2] < lista_puntos[6][2]
-            y_medio = lista_puntos[12][2] < lista_puntos[10][2]
-            if y_indice and y_medio:
-                return "SCROLL"
-            
-            return "MOVER"
-        elif z_imaginario >= pared_1:
-            umbral_air_tap=0.1478
-            x = lista_puntos[8][1] - lista_puntos[16][1]
-            y = lista_puntos[8][2] - lista_puntos[16][2]
-            distancia = math.hypot(x,y)
-            if distancia < 50 and z_indice > umbral_air_tap:
-                return "right"
-            elif z_indice > umbral_air_tap:
-                return "left"
-            else:
-                return "MOVER"
-            
-            
-            
-        
